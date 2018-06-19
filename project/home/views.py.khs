@@ -1,0 +1,42 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from home.utils.token import check_token, set_cookie 
+from home.utils.db import init_db, select_one, select_all, insert
+from home.models import User
+import json
+
+# Create your views here.
+
+def index(request):
+    if check_token(request):
+        return render(request, 'main.html')
+    else:
+        return render(request, 'login.html')
+
+@csrf_exempt
+def signup(request):
+   return ""
+
+@csrf_exempt
+def signin(request):
+    try:
+        data=json.loads(request.body.decode("utf-8"))
+    except ValueError:
+        return "Input must be json format", 400
+
+    user = User.create_from_request(data)
+
+    query = "select * from khu_user where user_email = '%s'"
+    user_db=select_one(query % user.user_email)
+
+    if user_db is None:
+        return HttpResponse("User not existed")
+
+    if user_db[3] != user.user_pw:
+        return HttpResponse("Incorrect password")
+
+    response = HttpResponse('set cookie')
+    response.set_cookie('khustagram_login',user_db[0])
+    return response

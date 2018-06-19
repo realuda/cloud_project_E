@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+body{
+    background-image: url("http://cfile225.uf.daum.net/image/2536774051F9DE622A49BB");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+}
+#picture_mini_profile
+{
+    margin-bottom: 50px;
+}
+#gidoong{
+    float: left;
+    width: 500px;
+    height: 100%;
+    background-color: rgba(136,136,136,0.8);
+    position: absolute;
+    left: 10%;
+}
+#front{
+    position: absolute;
+    top: 15%;
+    left: 55%;
+    right: 11%;
+}
+#front-top-text{
+    font-size: 48pt;
+    margin-bottom: 20px;
+    color: black;
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+#front-text{
+    font-size: 19pt;
+    margin-bottom: 20px;
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+#semi-gidoong{
+    width: 350px;
+    height: 655px;
+    margin: 0 auto;
+    margin-top: 22%;
+    margin-bottom: 95px;
+}
+#login-box{
+    height: 350px;
+    border-radius: 5px;
+    background-color: oldlace;
+    margin-bottom: 55px;
+}
+#login{
+    width: 250px;
+    height: 214px;
+    margin: 0 auto;
+    padding-top: 10%;
+}
+#email{
+    margin-bottom: 15px;
+}
+#password{
+    margin-bottom: 10px;
+}
+#idHolding{
+    float: left;
+    margin-top: 10px;
+    font-size: 10pt;
+}
+#loginButton{
+    float: right;
+    margin-bottom: 20px;
+}
+#searchPassword{
+    text-align: center;
+    clear: both;
+}
+#sign-up-text{
+    margin-top: 40px;
+    margin-bottom: 10px;
+    margin-left: 15%;
+}
+#sign-up-readyButton{
+    width: 250px;
+    margin: 0 auto;
+}
+#sign-up-box{
+    height: 280px;
+    border-radius: 5px;
+    background-color: oldlace;
+    display: none;
+}
+#sign-up{
+    width: 200px;
+    margin: 0 auto;
+    padding-top: 10%;
+}
+#sign-up-inputName{
+    margin-bottom: 15px;
+}
+#sign-up-inputEmail{
+    margin-bottom: 15px;
+}
+#sign-up-inputPassword{
+    margin-bottom: 15px;
+}
+#sign-up-inputUniversity{
+    margin-bottom: 20px
+}
+#sign-up-Button{
+    text-align: center;
+}

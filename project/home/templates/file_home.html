@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/3.5.1/www/src/brython.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/3.5.1/www/src/brython_stdlib.js"></script>
+  <script language="JavaScript" charset="UTF-8">
+    function deleteMyCookie(){
+    var expireDate = new Date();
+    var cookieName="khustagram_login";
+    expireDate.setDate( expireDate.getDate() - 1 );
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString() + "; path=/";
+    location.reload()    
+    }
+  </script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .jumbotron {
+      margin-bottom: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+    .row.content {
+      height: 450px
+    }
+
+    /* Set gray background color and 100% height */
+
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {
+        height: auto;
+      }
+    }
+  </style>
+
+</head>
+
+<body onload="brython()">
+
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1><a href=/>Khustabox</a></h1>
+    </div>
+    <div class="container text-right">
+	<button class="btn btn-lg btn-info" id="logout_Button" onclick="deleteMyCookie()">&nbsp;로그아웃&nbsp;</button>
+    </div>
+  </div>
+
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <!--rladnjsrb9999대신에 세션 유저아이디 -->
+        <p><a href="/files/{{user_email}}/">Files</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <h1>{{cur_place}}</h1>
+        <button style="float:right;" class="btn btn-primary" onclick="window.history.back()">BACK</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>
+                <B>이름</B>
+              </td>
+              <td>
+                <B>수정된시간</B>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            {% for item in cur_items %}
+            <tr>
+              <td><a href='javascript:mypath("{{item.1}}", "{{item.3}}")'>{{item.1}}</a></td>
+              <script>
+              //파일인지 폴더인지 구분하는거
+              function mypath(fname,filepath){
+                alert(fname);
+                var lastchar = fname.charAt(fname.length-1);
+                alert(lastchar);
+                if(lastchar=='/')
+                {
+                location.href=fname;
+                }
+                else
+                {
+                  location.href='/viewing/'+filepath+fname;
+
+                }
+              }
+              </script>
+              <td>{{item.4}}</td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <form action="/delete/" name="delete_form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button name="delete" value="DELETTE">삭제</button>
+                        <input type="hidden" name="cur_url" value={{cur_place}}>
+                        <input type="hidden" name="deleted_name" value={{item.1}}>
+                      </form>
+                    </li>
+                    <li>
+                      <form action="/download/" name="download_form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button name="download" value="DOWNLOAD">다운로드</button>
+                        <input type="hidden" name="cur_url" value={{cur_place}}>
+                        <input type="hidden" name="download_name" value={{item.1}}>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+      </div>
+      <div class="col-sm-2 sidenav">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">MENU
+    <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li>
+              <form method="POST" name="file_upload_form" action="/upload/" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="fileToUPLOAD">
+                <input type="submit" value="UPLOAD">
+
+                <input type="hidden" name="cur_url" value="">
+                <script>
+                  var cur_url = location.href;
+                  document.file_upload_form.cur_url.value = cur_url;
+                </script>
+              </form>
+            </li>
+            <br>
+            <li>
+              <form method="POST" name="folder_new_form" action="/new/" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="new_folder_name">
+                <input type="submit" value="NEW_FOLDER">
+                <input type="hidden" name="cur_url" value="">
+                <script>
+                  var cur_url = location.href;
+                  document.folder_new_form.cur_url.value = cur_url;
+                </script>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="container-fluid text-center">
+    <p>IN DEVELOPING</p>
+  </footer>
+
+</body>
+
+</html>

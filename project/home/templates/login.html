@@ -1,0 +1,77 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        Khustagram 로그인
+    </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <!-- Latest compiled and minified JavaScript -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="{% static 'js/login.js' %}" charset="UTF-8"></script>
+</head>
+<body>
+    <div id="gidoong">
+        <div id="semi-gidoong">
+            <div id="login-box">
+                <form action="" id="login" method="post">
+                    <div id="email">
+                        <input type="text" id="inputEmail" class="form-control" placeholder="이메일 입력" required autofocus>
+                    </div>
+                    <div id="password">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+                    </div>
+                    <div id="idHolding">
+                        <input type="checkbox">  ID 저장
+                    </div>
+                    <div id="loginButton">
+                        <button class="btn btn-lg btn-info" type="button" onclick="signin()">로그인</button>
+                    </div>
+                    <div id="searchPassword">
+                        <a href="" title="비밀번호 찾기" target="_blank">비밀번호가 기억이 안나세요?</a>
+                    </div>
+                </form>
+                <div id="sign-up-text">
+                    회원이 아니시라면
+                </div>
+                <div id="sign-up-readyButton">
+                    <button type="button" class="btn btn-lg btn-success" onclick="showSignUp()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp회원가입 하러가기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                </div>
+            </div>
+            <div id="sign-up-box">
+                <form action="" id="sign-up" method="post">
+                    <div id="sign-up-inputName">
+                        <input type="text" id="Sign-up-Name" class="form-control" placeholder="이름 입력" required autofocus>
+                    </div>
+                    <div id="sign-up-inputEmail">
+                        <input type="text" id="Sign-up-Email" class="form-control" placeholder="이메일 입력" required autofocus>
+                    </div>
+                    <div id="sign-up-inputPassword">
+                        <input type="password" id="Sign-up-Password" class="form-control" placeholder="비밀번호 입력" required autofocus>
+                    </div>
+                    <div id="sign-up-Button">
+                        <button class="btn btn-success" type="button" onclick="signup()">가입하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="front">
+        <div id="front-top-text">
+            <b>Khustagram</b>
+        </div>
+        <div id="front-text">
+           <b>hello</b>
+        </div>
+    </div>
+</body>
+</html>
